@@ -137,6 +137,7 @@ module AASM
 
           if success
             aasm_execute_after_commit do
+              event.fire_transition_callbacks(self, *args)
               event.fire_callbacks(:after_commit, self, *args)
               event.fire_global_callbacks(:after_all_commits, self, *args)
             end
